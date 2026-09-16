@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shopping With Annu</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f7fb;color:#1f2937}
+header{background:#111827;color:#fff;padding:18px 5%;display:flex;align-items:center;gap:25px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:800;margin-right:auto}.search{flex:1;min-width:220px;max-width:600px;padding:13px 18px;border:0;border-radius:25px;font-size:15px}
+.cart{background:#fff;color:#111827;padding:11px 16px;border-radius:22px;font-weight:700}
+.hero{margin:28px auto;padding:45px 7%;max-width:1200px;border-radius:24px;background:linear-gradient(120deg,#e0e7ff,#fce7f3);display:flex;align-items:center;justify-content:space-between;gap:25px}
+.hero h1{font-size:42px;margin:0 0 12px}.hero p{font-size:18px}.btn{display:inline-block;background:#111827;color:#fff;text-decoration:none;padding:13px 22px;border-radius:10px;font-weight:700}
+section{max-width:1200px;margin:30px auto;padding:0 20px}h2{font-size:27px}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.cat{background:white;padding:22px 12px;text-align:center;border-radius:15px;box-shadow:0 3px 12px #0000000b}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px #00000012}.pic{height:180px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:60px}.info{padding:15px}.price{font-size:20px;font-weight:800;margin:8px 0}.buy{width:100%;border:0;background:#111827;color:#fff;padding:11px;border-radius:9px;font-weight:700}
+footer{margin-top:50px;background:#111827;color:#fff;text-align:center;padding:30px}
+@media(max-width:600px){.hero h1{font-size:31px}.hero{padding:30px 24px}.hero div:last-child{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🛍️ Shopping With Annu</div>
+  <input class="search" id="search" placeholder="Search products..." oninput="filterProducts()">
+  <div class="cart">🛒 Cart: <span id="count">0</span></div>
+</header>
+
+<div class="hero">
+  <div><h1>Everything You Love,<br>All in One Place.</h1><p>Shop fashion, electronics, home & kitchen and more.</p><a class="btn" href="#products">Shop Now</a></div>
+  <div style="font-size:110px">🛒✨</div>
+</div>
+
+<section>
+<h2>Categories</h2>
+<div class="cats">
+<div class="cat">👕<br>Fashion</div><div class="cat">📱<br>Electronics</div><div class="cat">👟<br>Shoes</div><div class="cat">💄<br>Beauty</div><div class="cat">🏠<br>Home</div><div class="cat">🛒<br>Grocery</div>
+</div>
+</section>
+
+<section id="products">
+<h2>Featured Products</h2>
+<div class="products" id="grid"></div>
+</section>
+
+<footer>
+<strong>Shopping With Annu</strong><br><br>
+Secure Online Payment • Cash on Delivery • Easy Shopping
+</footer>
+
+<script>
+const products=[
+["Wireless Earbuds","🎧","₹999"],["Smart Watch","⌚","₹1,499"],["Casual T-Shirt","👕","₹599"],["Running Shoes","👟","₹1,299"],["Kitchen Set","🍳","₹899"],["Beauty Kit","💄","₹749"],["Backpack","🎒","₹699"],["Bluetooth Speaker","🔊","₹1,199"]
+];
+let cart=0;
+function render(list=products){
+ document.getElementById("grid").innerHTML=list.map(p=>`<div class="card"><div class="pic">${p[1]}</div><div class="info"><b>${p[0]}</b><div class="price">${p[2]}</div><button class="buy" onclick="addCart()">Add to Cart</button></div></div>`).join("");
+}
+function addCart(){cart++;document.getElementById("count").textContent=cart}
+function filterProducts(){let q=document.getElementById("search").value.toLowerCase();render(products.filter(p=>p[0].toLowerCase().includes(q)))}
+render();
+</script>
+</body>
+</html>
